@@ -1,31 +1,46 @@
-#include <bits/stdc++.h>
+/*
+Time complexity =O(sqrt(n)) or O(n/m + (m-1))
+Space complexity=O(1)
+*/
+
+#include <iostream>
+#include <math.h>
 using namespace std;
 
-bool jump_search(int a[], int n, int val,int &jumps)
+void jump_search(int *a, int l, int num)
 {
-    int jump_size = sqrt(n);
-    int start = 0;
-    int end = jump_size;
-    while (a[end] <= val and end < n)
+    int count = 0;
+    int low, high, jump;
+    low = 0;
+    jump = int(sqrt(l));
+    high = low + jump;
+    while (num >= a[min(high, l - 1)])
     {
-        jumps++;
-        start = end;
-        end += jump_size;
-        if (end > n - 1)
+        count++;
+        if(num == a[min(high, l - 1)])
         {
-            end = n;
+            cout << "Present " << count;
+            return;
+        }
+        low = high;
+        high = low + jump;
+        if (low >= l)
+        {
+            cout << "Not Present " << count;
+            return;
+        }
+        
+    }
+    for (int i = low; i < min(high, l - 1); i++)
+    {
+        count++;
+        if (a[i] == num)
+        {
+            cout << "Present " << count;
+            return;
         }
     }
-
-    for (int i = start; i < end; i++)
-    {
-        if (a[i] == val)
-        {
-            return true;
-        }
-    }
-
-    return false;
+    cout << "Not Present " << count;
 }
 
 int main()
@@ -34,25 +49,17 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
-        int a[n];
-        for (int i = 0; i < n; i++)
-        {
-            cin >> a[i];
-        }
-        int val;
-        cin >> val;
-        int jumps=1;
-        if (jump_search(a, n, val,jumps))
-        {
-            cout << "Present " << jumps<<"\n";
-        }
-        else
-        {
-            cout << "Not Present "<<jumps<<"\n";
-        }
-    }
+        int n, key, i;
 
+        cin >> n;
+
+        int a[n];
+        for (i = 0; i < n; i++)
+            cin >> a[i];
+
+        cin >> key;
+
+        jump_search(a, n, key);
+    }
     return 0;
 }
