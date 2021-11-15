@@ -1,48 +1,34 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
-
-void solve()
+void indices(int *a,int n)
 {
-    int n;
-    cin >> n;
-    int a[n];
-    for (int i = 0; i < n; i++)
+    int i,j,k;
+    for(i=0;i<n-2;i++)
     {
-        cin >> a[i];
-    }
-    for (int i = 0; i <n-1; i++)
-    {
-        int sum = a[i];
-        int l = 0;
-        int r = n - 1;
-        while (l < r)
+        for(j=i+1;j<n-1;j++)
         {
-            if (a[l] + a[r] == sum)
+            for(k=j+1;k<n;k++)
+            if(a[i]+a[j]==a[k])
             {
-                cout << l + 1 << " " << r + 1 << " " << i + 1 << "\n";
+                cout<<i+1<<","<<j+1<<","<<k+1<<endl;
                 return;
-            }
-            else if (a[l] + a[r] < sum)
-            {
-                l++;
-            }
-            else
-            {
-                r--;
             }
         }
     }
-    cout << "No sequence found."
-         << "\n";
+    cout<<"No sequence found\n";
 }
-
 int main()
 {
     int t;
-    cin >> t;
+    cin>>t;
     while (t--)
     {
-        solve();
-    }
+        int n,i;
+        cin>>n;
+        int a[n];
+        for(i=0;i<n;i++)
+        cin>>a[i];
+        indices(a,n);
+    }   
     return 0;
 }
