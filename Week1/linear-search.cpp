@@ -1,23 +1,43 @@
-#include<iostream>
+/*
+Time complexity =O(n)
+Space complexity=O(1)
+*/
+
+#include <iostream>
 using namespace std;
+
+void linear_search(int *a, int l, int num)
+{
+    int i, count = 0;
+    for (i = 0; i < l; i++)
+    {
+        count++;
+        if (a[i] == num)
+        {
+            cout << "Present " << count;
+            return;
+        }
+    }
+    cout << "Not Present " << count;
+}
+
 int main()
 {
-int a[5],i,n,index;
-cout<<"Enter 5 numbers :";
-for(i=0;i<5;i++)
-cin>>a[i];
-cout<<"\nEnter a Number to search in :";
-cin>>n;
-for(i=0;i<5;i++)
-{
-if(a[i]==n)
-{
-index = i;
-break;
-}
-}
- cout<<"\nFound at index no."<<index;
- cout<<endl;
- return 0;
+    int t;
+    cin>>t;
+    while (t--)
+    {
+        int n, key, i;
 
+        cin >> n;
+
+        int a[n];
+        for (i = 0; i < n; i++)
+            cin >> a[i];
+
+        cin >> key;
+        
+        linear_search(a, n, key);
+    }
+    return 0;
 }
